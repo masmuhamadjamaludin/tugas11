@@ -98,7 +98,7 @@ def get_exs():
             'example': example.get('example'),
             'id': str(example.get('_id')),
         })
-    return jsonify({'result': 'success'})
+    return jsonify({'result': 'success',"examples": examples})
 
 @app.route('/api/save_ex', methods=['POST'])
 def save_ex():
