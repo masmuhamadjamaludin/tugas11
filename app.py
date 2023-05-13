@@ -10,6 +10,18 @@ app = Flask (__name__)
 client = MongoClient('mongodb://jamal:jamal@ac-qxx6olp-shard-00-00.lbomoax.mongodb.net:27017,ac-qxx6olp-shard-00-01.lbomoax.mongodb.net:27017,ac-qxx6olp-shard-00-02.lbomoax.mongodb.net:27017/?ssl=true&replicaSet=atlas-2kj0jp-shard-0&authSource=admin&retryWrites=true&w=majority')
 db = client.dbsparta_plus_week2
 
+@app.route('/error')
+def error():
+    word = request.args.get('word')
+    suggestions = request.args.get('suggestion')
+    if suggestions:
+        suggestions = suggestions.split(',')
+    return render_template(
+        'error.html',
+        word = word,
+        suggestions=suggestions
+    )
+
 @app.route('/')
 def main():
     words_result = db.words.find({}, {'_id': False})
